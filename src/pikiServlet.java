@@ -49,7 +49,7 @@ public class pikiServlet extends HttpServlet {
 		response.setContentType("text/html;charset=euc-kr");
 		PrintWriter out = response.getWriter();
 		
-		DBtask.initDB();
+		//DBtask.initDB();
 		DBtask.createArray();
 		Gshare.setNumberOfGroup(DBtask.allCount);
 		Gshare.insertGroup(DBtask.l_Teams);

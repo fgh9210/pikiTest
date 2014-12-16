@@ -68,7 +68,7 @@ public class GroupShare extends linkedGroup {
 	public List<Integer> createRandomArray(linkedGroup[] l_Teams){
 		randomArray = new int[7];
 		allRandomArray = new int[tableAllcount];
-		
+		randomCount=0;
 		for(int i =0; i<7 ; i++){
 			randomArray[i] = l_Teams[i].size(); //각 팀의 사이즈를 넣어준다.
 			//System.out.println("randomArray[i]=" + i + "팀사이즈 ="+ l_Teams[i].size() );
