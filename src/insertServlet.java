@@ -40,7 +40,7 @@ public class insertServlet extends HttpServlet {
 		response.setContentType("text/html;charset=euc-kr");
 		PrintWriter out = response.getWriter();
 		DBtask.insertTeamTable(request.getParameter("Team"),request.getParameter("Name"));
-		out.println( request.getParameter("Team") + request.getParameter("Name"));
+		out.println( "insert OK: "+request.getParameter("Team") +" "+ request.getParameter("Name"));
 
 	}
 

@@ -21,6 +21,7 @@ iframe {border-style:none; }
 	
 	Name : <input type="text" name ="Name"><br>
 	<input type="submit" value="delete Team">
+	
 </form>
 </body>
 </html>

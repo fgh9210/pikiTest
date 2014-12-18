@@ -42,26 +42,15 @@ public class deleteServlet extends HttpServlet {
 		response.setContentType("text/html;charset=euc-kr");
 		
 		//if(request.getParameter("Team") and request.getParameter("Name"))
+		//String team = request.getParameter("Team");
+		//String name =request.getParameter("Name");
 		DBtask.deleteTeamTable(request.getParameter("Team"),request.getParameter("Name"));
-		DBtask.teamPeopleArray(request.getParameter("Team"),request.getParameter("Name"));
-		teamPeople = new Vector<String>();
-		
-		//for(int i=0; i<DBtask.teamPeopleName.length;i++){
-		//	teamPeople.add(DBtask.teamPeopleName[i]);
-		//}
-		
-		request.setAttribute("teamPeopleName", DBtask.teamPeopleName);
-		RequestDispatcher rd = request.getRequestDispatcher("/deleteTeam.jsp");
-		rd.forward(request, response);
-
-		
-		
 		DBtask.deleteTeamTable(request.getParameter("Name"));
-		//PrintWriter out = response.getWriter();
-		//out.println(request.getParameter("Team")+request.getParameter("Name"));
 		
-
+		request.setAttribute("name", request.getParameter("Name"));
 		
+		RequestDispatcher rd = request.getRequestDispatcher("/deleteOK.jsp");
+		rd.forward(request, response);
 	}
 
 }

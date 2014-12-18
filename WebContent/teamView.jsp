@@ -9,7 +9,7 @@
    if(code.equals("insertTeam")){
     	ViewPageURl="/insertTeam.jsp";
     }else if(code.equals("deleteTeam")){
-    	ViewPageURl="deleteTeam.jsp";
+    	ViewPageURl="/deleteTeam.jsp";
     }
     %>
     <jsp:forward page="<%= ViewPageURl %>"></jsp:forward>
