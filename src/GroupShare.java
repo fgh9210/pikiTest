@@ -50,7 +50,7 @@ public class GroupShare extends linkedGroup {
 	        		 if(l_Teams[teamRandom].size() > 0){
 	    	        	 n++; 
 	        			 Groups[x][y] = l_Teams[teamRandom].get(0);//String 항상0번째 데이터 뽑기
-	        			 System.out.println("insert: "+ l_Teams[teamRandom].get(0) + " n= " + n);
+	        			// System.out.println("insert: "+ l_Teams[teamRandom].get(0) + " n= " + n);
 
 	        			 l_Teams[teamRandom].removeFirst();//첫번째지우기
 		        	 
@@ -75,7 +75,7 @@ public class GroupShare extends linkedGroup {
 			for(int j=0 ; j < l_Teams[i].size() ; j++){
 				//System.out.println("j "+j);
 				allRandomArray[randomCount] = i;
-				System.out.println("allRandomArray[randomcount]=" + allRandomArray[randomCount] );
+				//System.out.println("allRandomArray[randomcount]=" + allRandomArray[randomCount] );
 				randomCount ++;
 			}
 			//randomCount += l_Teams[i].size()-1;

@@ -50,6 +50,7 @@ public class pikiServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		//DBtask.initDB();
+		DBtask.countTable();
 		DBtask.createArray();
 		Gshare.setNumberOfGroup(DBtask.allCount);
 		Gshare.insertGroup(DBtask.l_Teams);
@@ -60,7 +61,7 @@ public class pikiServlet extends HttpServlet {
 		out.println("th, td {padding:10px; }");
 		out.println("</style></head>");
 		
-		System.out.println(Gshare.divisor+ "명 그룹 "+ Gshare.groupColumn +"행"+ Gshare.groupRow +"열 그룹 1개<br>");		
+		//System.out.println(Gshare.divisor+ "명 그룹 "+ Gshare.groupColumn +"행"+ Gshare.groupRow +"열 그룹 1개<br>");		
 		
 		//Gshare.insertGroup(DBtask.l_Teams);
 		//1213Gshare.insertGroup(DBtask.linkG, DBtask.l_Teams);
