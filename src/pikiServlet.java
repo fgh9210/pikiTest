@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.Random;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +40,18 @@ public class pikiServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setAttribute("allCount", DBtask.allCount);
+		
+		request.setAttribute("capabilityLength", Gshare.capabilityAvg.length);
+		
+		for(int i=0; i<Gshare.capabilityAvg.length; i++) {
+			request.setAttribute("groupName"+i, Gshare.Groups[i][0]);
+			request.setAttribute("capability"+i, Gshare.capabilityAvg[i]);
+		}
+		
+		RequestDispatcher view = request.getRequestDispatcher("drawGraph.jsp");
+		view.forward(request, response);
+	
 	}
 
 	/**
@@ -53,7 +66,7 @@ public class pikiServlet extends HttpServlet {
 		DBtask.countTable();
 		DBtask.createArray();
 		Gshare.setNumberOfGroup(DBtask.allCount);
-		Gshare.insertGroup(DBtask.l_Teams);
+		Gshare.insertGroup(DBtask.l_Teams,  DBtask.l_Capability);
 		
 		out.println("<head><style>");
 		out.println("table {border-collapse:collapse; }");
@@ -78,11 +91,15 @@ public class pikiServlet extends HttpServlet {
 	        		 out.println("<td>"+Gshare.Groups[i][j]);
 	        	 else if(j==Gshare.Groups[i].length-1) {
 	        		 
-	        		 if(!isEmpty(Gshare.Groups[i][j]))
-	        			 break;
-	        		 else
-	        			 out.println(", "+Gshare.Groups[i][j]+"</td>");
-	        	 }
+	        		 if(!isEmpty(Gshare.Groups[i][j])) {
+		        			out.println("<td>"+String.format("%.2f", Gshare.capabilityAvg[i])+"%</td>");
+		        			break;
+		        		}
+		        		else {
+		        			out.println(", "+Gshare.Groups[i][j]+"</td>");
+		        			out.println("<td>"+String.format("%.2f", Gshare.capabilityAvg[i])+"%</td>");
+		        		}
+	        		 }
 	        	 else
 	        		 out.println(", "+Gshare.Groups[i][j]);
 	         }

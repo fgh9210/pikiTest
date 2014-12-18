@@ -6,52 +6,87 @@ import="java.util.*" %>
 <meta charset="EUC-KR">
 <title>Piki Test Main</title>
 <style>
-
+iframe {border-style:none; width:100%; }
+	aside, section {display:block; }
+	aside {width:10%; float:left; }
+	section {margin-bottom:10px; width:85%; height:2000px; float:right; }
 </style>
 </head>
 <body>
-<!--  http://www.coderanch.com/t/290885/JSP/java/text-box
-http://stackoverflow.com/questions/5512442/input-type-text-value-from-jsp-form-enctype-multipart-form-data-returns-null
-http://kaizar.tistory.com/196
-http://xnom.tistory.com/45
--->
-<form name="makeGroupForm" method=post action="/pikiTest1/pikiServlet" target="resultFrame">
-	<input type="submit" value="make Group">
-</form>
 
-<!--  1218-->
-<form name="inqurieForm" method=post action="/pikiTest1/dbServlet" target="resultFrame">
-	<input type="submit" value="inqurie Group">
-</form>
-<form action="<%= request.getContextPath() %>/teamView.jsp" target="resultFrame">
-하고 싶은 일:
-	<select name= "code">
+	<script>
+		var graphDisabled = false;
 		
-		<option value="insertTeam">insert</option>
-		<option value="deleteTeam">delete</option>
-	</select>
-	<input type="submit" value="이동">
-</form>
+		function autoResize() {
+			var iframeHeight = document.getElementById("groupFrame").contentWindow.document.body.scrollHeight;
+    		document.getElementById("groupFrame").height = iframeHeight;
+			document.getElementById("graphFrame").style.top = iframeHeight;
+		}
+		
+		window.onload = function() {
+			var iframeElement = document.getElementById("groupFrame");
+			iframeElement.onload = autoResize;
+		}
+	</script>
 
+<aside>
+	<form name="makeGroupForm" method=post action="/pikiTest1/pikiServlet" target="groupFrame">
+		<input type="submit" value="make Group" onClick="buttonEnabled()">
+		
+		<script>
+		function buttonEnabled() {
+    		graphDisabled = true;
+    		
+    		var iframeElement = document.getElementById("groupFrame");
+    		iframeElement.onload = autoResize;
+    		
+    		var graphIFrame = document.getElementById("graphFrame").contentWindow.document;
+    		graphIFrame.open();
+    		graphIFrame.close();
+    		
+    		var iframeHeight = document.getElementById("groupFrame").contentWindow.document.body.scrollHeight;
+    		document.getElementById("groupFrame").height = iframeHeight;
+    		document.getElementById("graphFrame").style.top = iframeHeight;
+		}
+		</script>
+	
+	</form>
+	<form name="drawGraphForm" method=get action="/pikiTest1/pikiServlet" target="graphFrame">
+		<input type="submit" value="draw Graph" id="drawGraph" onClick="return buttonDisabled();">
+		
+		<script>
+		function buttonDisabled() {
+			if(graphDisabled==false) {
+				alert("그룹을 먼저 클릭하세요.");
+				return false;
+			}
+			else {
+				graphDisabled = false;
+				return true;
+			}
+		}
+		</script>
+		
+	</form>
+	<form name="inqurieForm" method=post action="/pikiTest1/dbServlet" target="groupFrame">
+		<input type="submit" value="inqurie Group" onClick="buttonEnabled()">
+	</form>
+	<form action="<%= request.getContextPath() %>/teamView.jsp" target="groupFrame">
+		하고 싶은 일:
+		<select name= "code">
+		
+			<option value="insertTeam">insert</option>
+			<option value="deleteTeam">delete</option>
+		</select>
+		<input type="submit" value="이동">
+	</form>
+</aside>
 
-
-<!-- 1217추가 
-<form name="inqurieTeam" method=post action="/pikiTest1/dbServlet" target="resultFrame">
-	<input type="submit" value="inqurie Team">
-</form>
-
-<form name="insertTeam" method=post action="insertTeam.jsp" target="resultFrame">
-	<input type="submit" value="insert Team">
-</form>
-
-<form name="deleteTeam" method=post action="deleteTeam.jsp" target="resultFrame">
-	<input type="submit" value="delete Team">
-</form>
--->
-<iframe name="resultFrame" width="1200" height="1200"></iframe>
-
-
-
+<section>
+	<iframe name="groupFrame" id="groupFrame"></iframe>
+	<iframe name="graphFrame" id="graphFrame" height="1000"></iframe>
+	
+</section>
 
 </body>
 </html>
