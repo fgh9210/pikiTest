@@ -17,10 +17,12 @@ th, td {padding:5px; }
 
 <jsp:useBean id="pikiteam" class="java.util.Vector" scope="request" />
 <jsp:useBean id="pikiname" class="java.util.Vector" scope="request" />
+<jsp:useBean id="pikicap" class="java.util.Vector" scope="request" />
  
 <%
 	Vector m_pikiteam=(Vector)request.getAttribute("pikiteam");
-	Vector m_pikiname=(Vector)request.getAttribute("pikiname");%>
+	Vector m_pikiname=(Vector)request.getAttribute("pikiname");
+	Vector m_pikicap=(Vector)request.getAttribute("pikicap");%>
 
 <form name="deleteTeam" method=post action="/pikiTest1/deleteServlet">
 
@@ -29,12 +31,14 @@ th, td {padding:5px; }
 	<tr>
 	<th>Team</th>
 	<th>Name</th>
+	<th>Capability</th>
 	<th>check</th>
 	
 <%	for(int i=0; i<m_pikiteam.size(); i++){%>
 	</tr>
 		<td><%=m_pikiteam.get(i) %></td>
 		<td><%=m_pikiname.get(i) %></td>
+		<td><%=m_pikicap.get(i) %></td>
 		<td><input type="radio" name="Name" value="<%=m_pikiname.get(i)%>" ></td>
 	</tr>
 <%

@@ -16,6 +16,7 @@ public class databaseTask extends linkedGroup{
 	public int allCount;  
 	public String pikitableteam[] ; 
 	public String pikitablename[] ; 
+	public String pikitablecap[] ;
 	
 	private Statement stmt = null;
 	private ResultSet rs = null;
@@ -52,10 +53,12 @@ public class databaseTask extends linkedGroup{
 			int i=0;
 			pikitableteam = new String[allCount];
 			pikitablename = new String[allCount];
-
+			pikitablecap = new String[allCount];
 			while (rs.next()){
 				pikitableteam[i] = rs.getString("team");
 				pikitablename[i] = rs.getString("name");
+				int j= rs.getInt("capability");
+				pikitablecap[i] = String.valueOf(j); 
 				i++;
 
 			}
@@ -177,7 +180,7 @@ public class databaseTask extends linkedGroup{
 		discDB();
 	}
 	
-	public void insertTeamTable(String team, String name) {
+	public void insertTeamTable(String team, String name, int cap) {
 		
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -185,13 +188,14 @@ public class databaseTask extends linkedGroup{
 			String option="?useUnicode=true&characterEncoding=EUC_KR";
             url = url + option;
             
-            String sql="insert into pikiTable(Team,Name) Values(?,?)";
+            String sql="insert into pikiTable(Team,Name,Capability) Values(?,?,?)";
             //insert into pikiTable(Team,Name) Values(ST, ST12)
             conn = (Connection) DriverManager.getConnection(url, SQL_ID, SQL_PASS);
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, team);
 			pstmt.setString(2, name);
+			pstmt.setInt(3, cap);
 			pstmt.executeUpdate();
 		}catch(Exception e){
 			e.printStackTrace();

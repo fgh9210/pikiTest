@@ -19,7 +19,7 @@ public class dbServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public Vector<String> pikiteam  ;
 	public Vector<String> pikiname ;
-	
+	public Vector<String> pikicap ;
 	
 	databaseTask DBtask =new databaseTask();
 
@@ -52,15 +52,18 @@ public class dbServlet extends HttpServlet {
 		
 		try{
 		pikiteam = new Vector<String>();
-		pikiname = new Vector<String>();	
+		pikiname = new Vector<String>();
+		pikicap = new Vector<String>();
 		
 		for(int i=0; i<DBtask.pikitablename.length;i++){
 			pikiteam.add(DBtask.pikitableteam[i]);
 			pikiname.add(DBtask.pikitablename[i]);
+			pikicap.add(DBtask.pikitablecap[i]);
 		}
 		
 		request.setAttribute("pikiteam", pikiteam);
 		request.setAttribute("pikiname", pikiname);
+		request.setAttribute("pikicap", pikicap);
 		RequestDispatcher rd = request.getRequestDispatcher("/inqurieTeam.jsp");
 		rd.forward(request, response);
 		}catch(Exception e){

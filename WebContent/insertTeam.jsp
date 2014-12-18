@@ -19,7 +19,8 @@ iframe {border-style:none; }
 	<% }%>
 	</select><br>
 	
-	Name : <input type="text" name ="Name" ><br>	<!-- placeholder"><br>-->
+	Name : <input type="text" name ="Name" ><br>
+	Capability : <input type="text" name ="Cap" ><br>
 	<input type="submit" value="insert Team" >
 </form>
 <iframe name="insertresultFrame" width="1200" height="1200"></iframe>

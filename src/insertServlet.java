@@ -39,8 +39,8 @@ public class insertServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=euc-kr");
 		PrintWriter out = response.getWriter();
-		DBtask.insertTeamTable(request.getParameter("Team"),request.getParameter("Name"));
-		out.println( "insert OK: "+request.getParameter("Team") +" "+ request.getParameter("Name"));
+		DBtask.insertTeamTable(request.getParameter("Team"),request.getParameter("Name"), Integer.valueOf(request.getParameter("Cap")));
+		out.println( "insert OK: "+request.getParameter("Team") +" "+ request.getParameter("Name")+" " + request.getParameter("Cap"));
 
 	}
 
